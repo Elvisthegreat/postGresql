@@ -12,7 +12,7 @@ base = declarative_base()
 # create a class-based model for the "Programmer" table
 class Programmer(base):
     __tablename__ = "Programmer"
-    id = Column(Integer, primary_key=True) # Auto increment by on list
+    id = Column(Integer, primary_key=True) # Auto increment by one
     first_name = Column(String)
     last_name = Column(String)
     gender = Column(String)
@@ -93,7 +93,14 @@ elvis_blessing_eunice = Programmer(
 # session.add(margaret_hamilton)
 # session.add(bill_gates)
 # session.add(tim_berners_lee)
-session.add(elvis_blessing_eunice)
+# session.add(elvis_blessing_eunice)
+
+# commit our session to the database
+# session.commit()
+
+# updating a single record
+programmer = session.query(Programmer).filter_by(id=7).first()
+programmer.famous_for = "World President"
 
 # commit our session to the database
 session.commit()
@@ -103,7 +110,7 @@ programmers = session.query(Programmer)
 for programmer in programmers:
     print(
         programmer.id,
-        programmer.first_name + " " + programmer.last_name, # concat fname and lname with spacee in the middle
+        programmer.first_name + " " + programmer.last_name, # concat fname and lname with space between them
         programmer.gender,
         programmer.nationality,
         programmer.famous_for,
