@@ -99,11 +99,22 @@ elvis_blessing_eunice = Programmer(
 # session.commit()
 
 # updating a single record
-programmer = session.query(Programmer).filter_by(id=7).first()
-programmer.famous_for = "World President"
+# programmer = session.query(Programmer).filter_by(id=7).first() # update the object with it id no 7
+# programmer.famous_for = "World President"
 
 # commit our session to the database
-session.commit()
+# session.commit()
+
+# updating multiple records
+people = session.query(Programmer)
+for person in people:
+    if person.gender == "F":
+        person.gender = "Female"
+    elif person.gender == "M":
+        person.gender = "Male"
+    else: 
+        print("Gender not defined")
+    session.commit()
 
 # query the database to find all Programmers
 programmers = session.query(Programmer)
